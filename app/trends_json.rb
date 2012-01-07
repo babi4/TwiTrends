@@ -8,8 +8,9 @@ require 'uri'
 
 require "sinatra/base"
 require "sinatra/reloader"
-require 'rack/mobile-detect'
 
+
+require 'rack/mobile-detect'
 require 'coffee-script'
 
 
@@ -20,7 +21,7 @@ class MyApp < Sinatra::Base
 
   set :haml, {:format => :html5 }
   #enable :sessions
-  
+
   configure :development do
     register Sinatra::Reloader
   end
@@ -35,6 +36,7 @@ class MyApp < Sinatra::Base
       config.master = Mongo::Connection.new.db(name)
       config.persist_in_safe_mode = false
     end
+
   end
 
   before do
@@ -84,6 +86,10 @@ class MyApp < Sinatra::Base
   end  
 
   get '/top.json' do
+    response['Access-Control-Allow-Origin'] = '*'
+    response['Access-Control-Allow-Headers'] = 'Content-Type, X-Requested-With'
+    response['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
+
     mode = params[:mode]
 
     content_type :json
