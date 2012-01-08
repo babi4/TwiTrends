@@ -1,0 +1,18 @@
+{
+  "name": "Russian Twitter Trends",
+  "version": "0.0.0.1",
+  "description": "Расширение добавит на twitter.com русские тренды",
+   "browser_action": {
+    "default_icon": "icon.png",
+    "popup": "popup.html"
+  },
+  "permissions": [
+    "http://trends.babi4.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://*.twitter.com/*"],
+      "js": ["jquery-1.7.1.min.js","twitrends.js"]
+    }  
+  ]
+}
